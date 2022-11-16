@@ -68,4 +68,19 @@ nodo *buscaNodo(int pos)
 {
     int i = 1;
     nodo *aux 
+    while(i < pos && aux != NULL){
+        aux = aux->siguiente;
+        i++;
+    }
+    return aux;
+}
+
+//recorrido recursivo de la lista 
+void visita (nodo *actual)
+{
+    if(actual != NULL)
+    {
+        printf("%d", actual->dato);
+        
+    } 
 }

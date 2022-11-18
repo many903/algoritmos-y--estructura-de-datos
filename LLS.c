@@ -84,3 +84,7 @@ void visita (nodo *actual)
         
     } 
 }
+void interccambio (int i, int j)
+{
+    
+}

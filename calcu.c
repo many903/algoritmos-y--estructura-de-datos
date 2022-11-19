@@ -77,7 +77,7 @@ void baja(listas q[MAX], int n)
     for(i=a;i<n;i++){
     	q[i]=q[i+1];
     }
-	n=n-1;		
+	n=n-1;
 }
 
 int busca_conint(struct Model q[MAX], int n )

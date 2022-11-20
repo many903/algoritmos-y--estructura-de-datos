@@ -4,35 +4,21 @@ caracteres el valor mas alto y el mas bajo de la lista*/
 #include <stdlib.h>
 
 
-/*estructura de control*/
+/*estructura nodo*/
 typedef struct Model{
-    int lista [2];
-}listas;
-/*funciones*/
-int arreglo(n);
+    int amigos
+    int distancia 
+    struct nodo * next;
+}nodo;
+/*funciones*/ 
+nodo * incialista()
+{
+    return NULL;
+}
 
 int main()
 {
-    int n;
-    scanf("%d",&n);
-    arreglo(struct Model);
-    compara();
-}
-/*declaramos el arreglo con el que se va a trabajar */
-int arreglo(n){
-    int i;
-    for(i=0;i<n;i++)
-        {
-            p[i] = leer();
-        }
-    }
-}
-
-struct Model leer()
-{
-    struct Model listas;
-    printf("lista: ");
-    gets(listas.lista1);
-    getchar(); /* lee enter */
-    return (listas);
+    nodo * lista = incialista();
+    nodo * nuevo = crearnodo(/*datos que necesita el nodo para funcionar*/);
+    lista = agragarPio(lista, nuevo);
 }

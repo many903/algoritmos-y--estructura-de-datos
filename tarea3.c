@@ -1,6 +1,6 @@
-Class Nodo
+typedef struct Model
 {
-    T dato;
+    int dato;
     Nodo* next;
 
 public:
@@ -20,7 +20,7 @@ public:
         this->dato = dato;
         this->next = next;
     }
-};
+} Nodo;
 template  typename T
 class LinkedList{
     |                    ^

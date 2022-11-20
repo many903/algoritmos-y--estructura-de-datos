@@ -15,7 +15,11 @@ nodo * incialista()
 {
     return NULL;
 }
-
+nodo * crearnodo(int amigos, int distancia)
+{
+    nodo *aux = malloc(sizeof(amigos));
+    
+}
 int main()
 {
     nodo * lista = incialista();

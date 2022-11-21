@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 /*declaracion de la estructura de base*/
 typedef struct Mode
@@ -85,6 +86,17 @@ void visita (nodo *actual)
     } 
 }
 void interccambio (int i, int j)
+{
+    
+}
+
+void buruja ()
+{
+    
+}
+
+    
+void cartas ()
 {
     
 }

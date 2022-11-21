@@ -2,21 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
  
-typedef struct molde
+typedef struct Molde
 {
     int dato;
     struct Molde *siguiente;
 } Nodo;
 
 /*varible global "inicio de lista" */
-nodo *inicio = NULL;
+Nodo *inicio = NULL;
 
 /*incertar el valor al inicio de la lista */
 void insertar(int valor)
-{   nodo*nuevo;
-    nuevo =  malloc(sizeof(nodo));
+{   Nodo*nuevo;
+    nuevo =  malloc(sizeof(Nodo));
     nuevo -> dato = valor;
-    if(valor == NULL) {
+    if(valor = NULL) {
         inicio = nuevo;
         nuevo -> siguiente = NULL;
     }
@@ -31,10 +31,10 @@ void recorrido()
     int longitud=0;
 
     print("\nInicio del recorrido\n\n");
-    if (aux -> siguiente1 != NULL) {
+    if (aux ->siguiente != NULL) {
         while (aux -> siguiente != NULL){
-            
-            printf("%d",nodo*aux -> siguiente1);
+
+            printf("%d",nodo*aux -> siguiente);
             aux = aux ->siguiente;
             longitud++;
         }

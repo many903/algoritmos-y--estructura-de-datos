@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 /*declaracion de la estructura de base*/
 typedef struct Mode
@@ -28,7 +27,7 @@ void insertar(int valor)
         inicio =nuevo;
     }
 }
-
+/*
 //recorre la lista y deebuelve su longitud 
 int recorrer()
 {   nodo *aux = inicio;
@@ -47,9 +46,9 @@ int recorrer()
 
     return longitud;
 }
-
+*/
 /*devueleve la posición en que se encuentra un valor, 0 -1en orto caso*/
-int buscaDato(int valor)
+/*int buscaDato(int valor)
 {   nodo *aux = inicio;
     int pocion = 1;
     
@@ -63,7 +62,7 @@ int buscaDato(int valor)
     else
         return-1;
 }
-
+*/
 /*devueleve el apuntador al nodo que esta en una posición particuliar */
 nodo *buscaNodo(int pos)
 {
@@ -73,7 +72,7 @@ nodo *buscaNodo(int pos)
         aux = aux->siguiente;
         i++;
     }
-    return aux;
+    return aux;5
 }
 
 //recorrido recursivo de la lista 
@@ -88,25 +87,4 @@ void visita (nodo *actual)
 void interccambio (int i, int j)
 {
     
-}
-
-void buruja ()
-{
-    for (i=1;i<n-1;i++){
-      for(j=0;j<n-1;j++)
-        {
-          intercambia();
-        }
-      }
-}
-    
-void cartas ()
-{
-    for(i=1;i<n-1;i++){
-      aux=a(i);
-      j=i-1;
-      do(j>=0 && j>aux){
-        
-      }
-    }
 }

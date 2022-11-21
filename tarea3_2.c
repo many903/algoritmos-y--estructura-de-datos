@@ -27,14 +27,14 @@ void insertar(int valor)
 }
 
 void recorrido()
-{   nodo*aux= inicio;
+{   Nodo*aux= inicio;
     int longitud=0;
 
     print("\nInicio del recorrido\n\n");
     if (aux ->siguiente != NULL) {
         while (aux -> siguiente != NULL){
 
-            printf("%d",nodo*aux -> siguiente);
+            printf("%d",Nodo*aux -> siguiente);
             aux = aux ->siguiente;
             longitud++;
         }

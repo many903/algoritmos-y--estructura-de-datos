@@ -8,7 +8,7 @@ Manuel Enrique Garcia Neve 2193077979*/
 
 //no se si estoy bien aun me falta 
 
-#include <stdio..h>
+#include <stdio.h>
 #include<stdlib.h>
 
 typedef struct Molde 

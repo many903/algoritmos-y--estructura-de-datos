@@ -34,7 +34,7 @@ void recorrido()
     if (aux ->siguiente != NULL) {
         while (aux -> siguiente != NULL){
 
-            printf("%d\n",aux -> siguiente);
+            printf("%d\n");
             aux = aux ->siguiente;
             longitud++;
         }

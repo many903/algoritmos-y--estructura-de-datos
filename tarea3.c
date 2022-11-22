@@ -30,11 +30,11 @@ void recorrido()
 {   Nodo*aux= inicio;
     int longitud=0;
 
-    print("\nInicio del recorrido\n\n");
+    printf("\nInicio del recorrido\n\n");
     if (aux ->siguiente != NULL) {
         while (aux -> siguiente != NULL){
 
-            printf("%d",Nodo*aux -> siguiente);
+            printf("%d\n");
             aux = aux ->siguiente;
             longitud++;
         }
@@ -47,5 +47,5 @@ int main()
 {
     insertar(4);
     recorrido();
-    printf("Dato de en inicio: %d\n",in
+    printf("Dato de en inicio: %d\n",inicio->dato);
 }

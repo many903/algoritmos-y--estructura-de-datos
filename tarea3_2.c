@@ -11,18 +11,30 @@ typedef struct Molde
 /*varible global "inicio de lista" */
 Nodo *inicio = NULL;
 
-/*incertar el valor al inicio de la lista */
-void insertar(int valor)
-{   Nodo*nuevo;
-    nuevo =  malloc(sizeof(Nodo));
-    nuevo -> dato = valor;
-    if(valor = NULL) {
+/*incertar el valor al inicio de la lista --- modifica la funcion incertar */
+void insertar(int x)
+{   
+    Nodo*nuevo;
+    nuevo = malloc(sizeof(Nodo));
+    nuevo->dato = x;
+    Nodo*anterior;
+    Nodo*actual;
+
+    if (inicio == NULL)
+    {
         inicio = nuevo;
-        nuevo -> siguiente = NULL;
+        nuevo = nuevo -> siguiente= NULL;
     }
-    else{
-        nuevo -> siguiente = inicio;
-        inicio = nuevo;
+    else
+    {   
+        anterior = NULL;
+        actual = inicio;
+        while (actual != NULL)
+        {   
+            anterior = actual;
+            actual = actual -> siguiente;
+        }
+    anterior -> siguiente = NULL;
     }
 }
 
@@ -30,11 +42,11 @@ void recorrido()
 {   Nodo*aux= inicio;
     int longitud=0;
 
-    print("\nInicio del recorrido\n\n");
+    printf("\nInicio del recorrido\n\n");
     if (aux ->siguiente != NULL) {
         while (aux -> siguiente != NULL){
 
-            printf("%d",Nodo*aux -> siguiente);
+            printf("%d",aux -> siguiente);
             aux = aux ->siguiente;
             longitud++;
         }

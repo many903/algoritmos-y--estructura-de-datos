@@ -4,6 +4,7 @@
  
 typedef struct Molde
 {
+    
     int dato;
     struct Molde *siguiente;
 } Nodo;

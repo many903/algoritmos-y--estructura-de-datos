@@ -1,3 +1,4 @@
+/*archivo de trabajo para clase */
 /*lista ligada simple*/
 
 

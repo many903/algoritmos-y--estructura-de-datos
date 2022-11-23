@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-typedef struct producto inventario;
-{   char nombre[25];
+typedef struct inventario{   
+    char nombre[25];
     char fecha[20];
     char proveedor [30];
     int existencia;
     int codigo;
     float precio_venta;
     struct producto *siguiente;
-};
-typedef struct producto inventario;
+}inventario;
 
-inventro *inicio = NULL;
+
+inventario *inicio = NULL;
 
 void insertar (char nombre[25], char fecha[20], char proveedor[30], int existencia, int codigo, float precio_venta)
 {
@@ -50,7 +49,7 @@ else
 int main () {
     insertar("Chocolate", "26/10/22", "Suiza", 5,3,14.00);
     
-    printf("Nombre %s\n", inicio->Nombre);
+    printf("Nombre %s\n", inicio->nombre);
     printf("fecha %s\n", inicio->fecha);
     printf("proveedor%s\n", inicio->proveedor);
     printf("existencia %d\n", inicio->existencia);

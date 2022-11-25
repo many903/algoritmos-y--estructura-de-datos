@@ -1,8 +1,4 @@
-/*
-    Listas doblemente enlazadas
-    Asael García
-    20/09/2015
-*/
+/*lista doblemente ligada */
 #include <stdio.h>
 #include <stdlib.h>
 

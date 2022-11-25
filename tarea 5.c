@@ -16,39 +16,39 @@ typedef struct nodo
 
 
 NODO *CrearNodo(int dato);
-int InsertarInicio(NODO **cabeza, int dato);
-int InsertarFinal(NODO **cabeza, int dato);
-void ImprimirLista(NODO *cabeza);
-int EliminarNodo(NODO **cabeza, int dato);
+int InsertarInicio(NODO **inicio, int dato);
+int InsertarFinal(NODO **inicio, int dato);
+void ImprimirLista(NODO *inicio);
+int EliminarNodo(NODO **inicio, int dato);
 
 
 int main()
 {
-    NODO *cabeza = NULL;
+    NODO *inicio = NULL;
 
-    InsertarInicio(&cabeza, 1);
-    InsertarInicio(&cabeza, 2);
-    InsertarFinal(&cabeza, 3);
-    InsertarFinal(&cabeza, 4);
-    EliminarNodo(&cabeza, 4);
-    ImprimirLista(cabeza);
+    InsertarInicio(&inicio, 1);
+    InsertarInicio(&inicio, 2);
+    InsertarFinal(&inicio, 3);
+    InsertarFinal(&inicio, 4);
+    EliminarNodo(&inicio, 4);
+    ImprimirLista(inicio);
     system("pause>nul");
 
     return 0;
 }
 
 //Función para eliminar un nodo de la lista
-int EliminarNodo(NODO **cabeza, int dato)
+int EliminarNodo(NODO **inicio, int dato)
 {
-    NODO *actual = *cabeza, *ant = NULL, *sig = NULL;
+    NODO *actual = *inicio, *ant = NULL, *sig = NULL;
 
     while(actual != NULL)
     {
         if(actual->dato == dato)
         {
-            if( actual == *cabeza)
+            if( actual == *inicio)
             {
-                *cabeza = actual->siguiente;
+                *inicio = actual->siguiente;
                 if( actual->siguiente != NULL)
                     actual->siguiente->anterior = NULL;
             }
@@ -76,9 +76,9 @@ int EliminarNodo(NODO **cabeza, int dato)
 }
 
 //Función para insertar al final de la lista
-int InsertarFinal(NODO **cabeza, int dato)
+int InsertarFinal(NODO **inicio, int dato)
 {
-    NODO *nuevo = NULL, *nAux = *cabeza;
+    NODO *nuevo = NULL, *nAux = *inicio;
 
     nuevo = CrearNodo(dato);
     if (nuevo != NULL)
@@ -92,9 +92,9 @@ int InsertarFinal(NODO **cabeza, int dato)
 }
 
 //Función para imprimir la lista
-void ImprimirLista(NODO *cabeza)
+void ImprimirLista(NODO *inicio)
 {
-    NODO *nAux = cabeza;
+    NODO *nAux = inicio;
 
     while(nAux != NULL)
     {
@@ -104,18 +104,18 @@ void ImprimirLista(NODO *cabeza)
 }
 
 //Función para insertar al inicio de la lista
-int InsertarInicio(NODO **cabeza, int dato)
+int InsertarInicio(NODO **inicio, int dato)
 {
     NODO *nuevo = NULL;
 
     nuevo = CrearNodo(dato);
     if (nuevo != NULL)
     {
-        nuevo->siguiente = *cabeza;
+        nuevo->siguiente = *inicio;
         nuevo->anterior = NULL;
-        if( *cabeza != NULL)
-            (*cabeza)->anterior = nuevo;
-        *cabeza = nuevo;
+        if( *inicio != NULL)
+            (*inicio)->anterior = nuevo;
+        *inicio = nuevo;
         return 1;
     }
     return 0;

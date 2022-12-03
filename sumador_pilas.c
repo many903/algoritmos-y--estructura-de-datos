@@ -10,7 +10,6 @@
 typedef char* pila;
 
 typedef struct nodo {
-    int n;
     struct nodo *next;
 }Nodo;
 

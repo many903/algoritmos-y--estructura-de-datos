@@ -1,47 +1,80 @@
-#ifndef pila_h
-#define pila_h
+#include <stdio.h>
+#include <stdlib.h>
 
-#iclude <stdio.h>
-#iclude <stdlib.h>
-/*
+struct nodo
+{
+    int numero;
+    struct nodo *siguiente;
 
+};
 
-*/
-typedef char* pila;
+void agregar(int numero);
+void eliminar();
+int imprimirUltimo();
 
-typedef struct nodo {
-    struct nodo *next;
-}Nodo;
+struct nodo *superior = NULL;
 
-typedefstruct pila {
-    Nodo* cabeza;
-}Pila;
+void agregar(int numero)
+{
+    struct nodo *nuevoNodo = malloc(sizeof(struct nodo));
+    nuevoNodo -> numero = numero;
+    nuevoNodo -> siguiente = superior;
+    superior = nuevoNodo;
 
-Nodo* CrearNodo(int n);
-void destruirNodo(Nodo* nodo);
-void consume ();
-
-int main(){
 
 }
-Nodo* crearNodo(int n){
-    Nodo* nodo=(Nodo*)malloc(sizeof(Nodo));
-    nodo-> n = n;
-    nodo-> next = NULL;
-    return nodo;
-}
 
-void destruirNodo(Nodo* nodo){
-    nodo-> next = NULL;
-    free(nodo);
-}
-void Apilar(Pila* pila, n){
-    Nodo* nodo= crearNodo(n);
-    nodo-> next = pila->cabeza;
-    piola->cabeza = nodo;
-}
- void consimir (){
-    if (pila -> cabeza!=NULL){
-        nod
+void eliminar()
+{
+    if(superior != NULL)
+    {
+        struct nodo *temporal = superior;
+        superior = superior->siguiente;
+        free(temporal);
+
     }
- }
+
+}
+
+
+int imprimirUltimo()
+{
+  if (superior == NULL)
+    return -1;
+  return superior -> numero;
+} 
+
+int main()
+{
+    int eleccion;
+    int numero;
+
+    while (eleccion != -1)
+    {
+        
+    //printf("1-Insertar en la pila \n2-Eliminar de la pila \n3-impimir el ultimo\n");
+    scanf("%d",&eleccion);
+
+    switch(eleccion)
+    {
+        case 1:
+        scanf("%d",&numero);
+        agregar(numero);
+        break;
+
+        case 2:
+        eliminar();
+        break;
+
+        case 3:
+        printf("%d\n", imprimirUltimo());
+        break;
+
+    }
+
+
+
+    }
+    
+
+}

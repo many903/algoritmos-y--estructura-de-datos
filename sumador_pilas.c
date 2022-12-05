@@ -1,80 +1,44 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-struct nodo
+int main(void)
 {
-    int numero;
-    struct nodo *siguiente;
 
-};
+  int P[100000];
 
-void agregar(int numero);
-void eliminar();
-int imprimirUltimo();
+  int n,ii=0,i=0;
 
-struct nodo *superior = NULL;
+  char a[]={'A','G','R','E','G','A'};
 
-void agregar(int numero)
-{
-    struct nodo *nuevoNodo = malloc(sizeof(struct nodo));
-    nuevoNodo -> numero = numero;
-    nuevoNodo -> siguiente = superior;
-    superior = nuevoNodo;
+  char c[]={'C','O','N','S','U','M','E'};
 
+  char im[]={'I','M','P','R','I','M','E'};
 
-}
+  char e[8];
 
-void eliminar()
-{
-    if(superior != NULL)
-    {
-        struct nodo *temporal = superior;
-        superior = superior->siguiente;
-        free(temporal);
+  scanf("%i",&n);
 
-    }
+  while(ii<n)
+  {
+      while(i<=n && ii<n)
+        {
+          scanf("%s",&e);
 
-}
-
-
-int imprimirUltimo()
-{
-  if (superior == NULL)
-    return -1;
-  return superior -> numero;
-} 
-
-int main()
-{
-    int eleccion;
-    int numero;
-
-    while (eleccion != -1)
-    {
-        
-    //printf("1-Insertar en la pila \n2-Eliminar de la pila \n3-impimir el ultimo\n");
-    scanf("%d",&eleccion);
-
-    switch(eleccion)
-    {
-        case 1:
-        scanf("%d",&numero);
-        agregar(numero);
-        break;
-
-        case 2:
-        eliminar();
-        break;
-
-        case 3:
-        printf("%d\n", imprimirUltimo());
-        break;
-
-    }
-
-
-
-    }
-    
-
+          if(e[1]==a[1])
+          {
+            scanf("%i",&P[i]);
+            i+=1;
+          }
+          if(e[1]==c[1])
+          {
+            P[i-2]=P[i-2]+P[i-1];
+            P[i-1]=NULL;
+            i-=1;
+          }
+          if(e[1]==im[1])
+          {
+            printf("%i\n",P[i-1]);
+          }
+          ii+=1;
+        }
+  } return 0;
 }

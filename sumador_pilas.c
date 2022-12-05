@@ -14,6 +14,36 @@ int imprimirUltimo();
 
 struct nodo *superior = NULL;
 
+void agregar(int numero)
+{
+    struct nodo *nuevoNodo = malloc(sizeof(struct nodo));
+    nuevoNodo -> numero = numero;
+    nuevoNodo -> siguiente = superior;
+    superior = nuevoNodo;
+
+
+}
+
+void eliminar()
+{
+    if(superior != NULL)
+    {
+        struct nodo *temporal = superior;
+        superior = superior->siguiente;
+        free(temporal);
+
+    }
+
+}
+
+
+int imprimirUltimo()
+{
+  if (superior == NULL)
+    return -1;
+  return superior -> numero;
+} 
+
 int main()
 {
     int eleccion;
@@ -48,33 +78,3 @@ int main()
     
 
 }
-void agregar(int numero)
-{
-    struct nodo *nuevoNodo = malloc(sizeof(struct nodo));
-    nuevoNodo -> numero = numero;
-    nuevoNodo -> siguiente = superior;
-    superior = nuevoNodo;
-
-
-}
-
-void eliminar()
-{
-    if(superior != NULL)
-    {
-        struct nodo *temporal = superior;
-        superior = superior->siguiente;
-        free(temporal);
-
-    }
-
-}
-
-
-int imprimirUltimo()
-{
-  if (superior == NULL)
-    return -1;
-  return superior -> numero;
-} 
-

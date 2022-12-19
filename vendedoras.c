@@ -36,5 +36,5 @@ int main() {
     for (int i = 0; i < k; i++) {
         printf("%s %d\n", vendedores[i].nombre, vendedores[i].ventas);
     }
-    return 0;
+ return 0;
 }

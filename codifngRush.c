@@ -20,8 +20,8 @@ El Puntaje de la persona que te ha dicho Freddy.*/
 #define MAX 100
  
 typedef struct snodoa{
-    int Nombre;
-    int Puntos;
+    int Nombre;//M
+    int Puntos;//p
     struct snodoa *izq, *der;
 }tnodoa;
  
@@ -37,7 +37,7 @@ int main (){
  
     tpunteroa raiz;
     int dato, esCompleto=1, aux;
-    P = NULL;
+    P = NULL; //P = particiopantes 
     scanf ("%d",&i);
 
 system ("PAUSE");
@@ -82,7 +82,8 @@ void participantes (tpunteroa *raiz, int dato){
         scanf ("%d",&P);
     }else{
         for(i=0; i<P; i++){
-            insertarArbol (&raiz,(scanf ("%d", &dato)));
+            (scanf ("%c", &dato));
+
         }
     }
 }

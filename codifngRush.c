@@ -17,7 +17,7 @@ El Puntaje de la persona que te ha dicho Freddy.*/
 #include <stdlib.h>
 #include <ctype.h>
  
-#define MAX 100
+#define MAX 100      
  
 typedef struct snodoa{
     int Nombre;//M

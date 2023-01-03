@@ -39,25 +39,11 @@ int main (){
     int dato, esCompleto=1, aux;
     P = NULL; //P = particiopantes 
     scanf ("%d",&i);
+    participantes (tpunteroa *raiz, int *dato);
+    busca(tpunteroa *raiz, int dato);
 
 system ("PAUSE");
 return 0;
-}
- 
-//ARBOL-INSERTAR//
-void insertarArbol (tpunteroa *raiz, int dato){
-    if (*raiz == NULL){
-        *raiz = malloc(sizeof(tnodoa));
-        (*raiz)->nombre = dato;
-        (*raiz)->izq = NULL;
-        (*raiz)->der = NULL;
-    }else{
-        if (dato <= (*raiz)->valor){
-            insertarArbol (&(*raiz)->izq, dato);
-        }else{
-            insertarArbol (&(*raiz)->der, dato);
-        }
-    }
 }
  
 //ARBOL-BUSCAR//
@@ -65,10 +51,10 @@ tpunteroa buscar (tpunteroa raiz, int dato){
     if (raiz == NULL){
         return NULL;
     }else{
-        if (dato == raiz->valor){
-            return raiz;
+        if (dato == raiz->nombre){
+            return raiz-> valor;
         }else{
-            if (dato < raiz->valor){
+            if (dato == raiz->nombre){
                 return buscar (raiz->izq, dato);
             }else{
                 return buscar (raiz->der, dato);
@@ -83,7 +69,16 @@ void participantes (tpunteroa *raiz, int dato){
     }else{
         for(i=0; i<P; i++){
             (scanf ("%c", &dato));
-
+            while(a==0){
+                if( isdigit(dato) ) 
+                {
+                    (*raiz)->valor = dato;
+                }
+                else 
+                {
+                    (*raiz)->nombre = dato;
+                }
+            }
         }
     }
 }

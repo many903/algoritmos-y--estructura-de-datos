@@ -12,6 +12,8 @@ int binarySearch(int nums[], int n, int target)
     {
         // encuentra el valor medio en el espacio de búsqueda y
         // lo compara con el objetivo
+        /*.m,v,.smflmsdfç
+        a*/
  
         int mid = (low + high)/2;    // puede ocurrir un desbordamiento
         // int mid = low + (high - low)/2;

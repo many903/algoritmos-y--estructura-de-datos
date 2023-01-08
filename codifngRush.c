@@ -11,74 +11,33 @@ Siguientes M Lineas:N(i), el nombre del concursante i-esimo seguido por P(i1), l
 Siguiente Linea: El nombre del concursante a buscar.
 
 Salida
-El Puntaje de la persona que te ha dicho Freddy.*/
-#include <stdio.h>
+El Puntaje de la persona que te ha dicho Freddy.*/#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
- 
-#define MAX 100      
- 
-typedef struct snodoa{
-    int Nombre;//M
-    int Puntos;//p
-    struct snodoa *izq, *der;
-}tnodoa;
- 
-typedef tnodoa *tpunteroa;
- 
-/*funciones*/
-void insertarArbol (tpunteroa *raiz, int dato);
-tpunteroa buscar (tpunteroa raiz, int dato);
-void participantes (tpunteroa *raiz, int *dato);
- 
- 
-int main (){
- 
-    tpunteroa raiz;
-    int dato, esCompleto=1, aux;
-    P = NULL; //P = particiopantes 
-    scanf ("%d",&i);
-    participantes (tpunteroa *raiz, int *dato);
-    busca(tpunteroa *raiz, int dato);
-
-system ("PAUSE");
-return 0;
-}
- 
-//ARBOL-BUSCAR//
-tpunteroa buscar (tpunteroa raiz, int dato){
-    if (raiz == NULL){
-        return NULL;
-    }else{
-        if (dato == raiz->nombre){
-            return raiz-> valor;
-        }else{
-            if (dato == raiz->nombre){
-                return buscar (raiz->izq, dato);
-            }else{
-                return buscar (raiz->der, dato);
-            }
+int main(void) { 
+  int N, participante_buscar=0;   
+  scanf("%i",&N);
+  struct lista{
+    char nombre_p[20];
+    int puntos;
+    }r_participantes[N];
+  int i=0;
+  while(i<N){
+    scanf("%s",r_participantes[i].nombre_p);
+    scanf("%d",&r_participantes[i].puntos);
+    i++;
+  }
+  char buscar[10][20];
+  scanf("%s",buscar[1]);
+  i=0;
+  while(i<N){
+    if(strcmp(buscar[1],r_participantes[i].nombre_p)==0){
+        participante_buscar=r_participantes[i].puntos;
+        break;
         }
-    }
-}
-/*participantes*/
-void participantes (tpunteroa *raiz, int dato){
-    if (*raiz == NULL){
-        scanf ("%d",&P);
-    }else{
-        for(i=0; i<P; i++){
-            (scanf ("%c", &dato));
-            while(a==0){
-                if( isdigit(dato) ) 
-                {
-                    (*raiz)->valor = dato;
-                }
-                else 
-                {
-                    (*raiz)->nombre = dato;
-                }
-            }
-        }
-    }
+    i++;
+       }
+  
+  printf("%d", participante_buscar);
+  
+  return 0;
 }

@@ -14,6 +14,19 @@ typedef struct alumno {
 
 
 int main(){
-
+    int ch;
+    do{
+        printf("\n==================================================================")
+        printf("\n1.-CREAR")
+        printf("\n1.-DISPLAY")
+        printf("\n1.-APPEND")
+        printf("\n1.-EXIT")
+        printf("\n1.-")
+        printf("\n1.-")
+        printf("\n1.-")
+        printf("\n1.-")
+        printf("\n1.-")
+        printf("\n1.-")
+    }
     return 0;
 }

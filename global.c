@@ -2,12 +2,12 @@
 
 typedef struct alumno {
     int rno;
-    char nombre 
+    char nombre;
     struct sujeto{
         int calif;
         char UEA;
         int mark;
-    }
+    }sub[3];
     int total;
     float per;
 } estudiente;
@@ -20,11 +20,11 @@ void append(){}
 int main(){
     int ch;
     do{
-        printf("\n==================================================================")
-        printf("\n1.-CREAR")
-        printf("\n1.-DISPLAY")
-        printf("\n1.-APPEND")
-        printf("\n1.-EXIT")
+        printf("\n==================================================================");
+        printf("\n1.-CREAR");
+        printf("\n1.-DISPLAY");
+        printf("\n1.-APPEND");
+        printf("\n1.-EXIT");
 
         printf("\nIngresa la opcion deceada:   ");
         scanf("%d",&ch);

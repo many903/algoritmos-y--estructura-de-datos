@@ -12,7 +12,24 @@ typedef struct alumno {
     float per;
 } estudiente;
 
-void crear(){}
+void crear(){     
+  estudiente *s;
+  int n, i, j;
+  printf("cuantos estudiantes tendra en clase:  ")
+  scanf("%d",&n);
+
+  s=(estudiente*)calloc(n, sizeof(estudiente));
+
+  for (i=0; i<n; i++){
+    printf("ingrese la matricula:   ")
+    scanf("%d",&s[i]);
+    fflush(stdin);
+    printf("ingrese el nombre del estudiante: ");
+    scanf("%s",s[i].nombre);
+    for(j=0; j< 3; j++);
+        printf("e")
+  }
+}
 void impresion(){}
 void append(){}
 

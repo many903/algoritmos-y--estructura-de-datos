@@ -14,24 +14,30 @@ typedef struct alumno {
 
 void crear(){     
   estudiente *s;
+  FILE *fp;
   int n, i, j;
   printf("cuantos estudiantes tendra en clase:  ")
   scanf("%d",&n);
 
-  s=(estudiente*)calloc(n, sizeof(estudiente));
+  s = (estudiente*)calloc(n, sizeof(estudiente));
 
-  for (i=0; i<n; i++){
+  for (i = 0; i<n; i++){
+    s[i].total = 0;
+    s[i].per = 0;
     printf("ingrese la matricula:   ")
     scanf("%d",&s[i]);
     fflush(stdin);
     printf("ingrese el nombre del estudiante: ");
     scanf("%s",s[i].nombre);
-    for(j=0; j< 3; j++);
+    for(j=0; j< 3; j++){
         printf("ingrese el codigo de la UEA");
         scanf("%d",&s[i].UEA[j].mark);
-
+        s[i].total+= s[i].UEA[j].mark;
+    }
+    s[i].per = s[i].total / 3.0;
   }
 }
+
 void impresion(){}
 void append(){}
 

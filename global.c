@@ -27,7 +27,9 @@ void crear(){
     printf("ingrese el nombre del estudiante: ");
     scanf("%s",s[i].nombre);
     for(j=0; j< 3; j++);
-        printf("e")
+        printf("ingrese el codigo de la UEA");
+        scanf("%d",&s[i].UEA[j].mark);
+
   }
 }
 void impresion(){}

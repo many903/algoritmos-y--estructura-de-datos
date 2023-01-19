@@ -1,46 +1,55 @@
+*/
+
+// LIBRERIAS QUE SE USARON 
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #define MAX 30
 
-typedef struct Model 
+//DEFINIR LA ESTRUCTURA DEL POBLEMA
+
+typedef struct persona 
 {
-     char lista1[35];
-     char lista2[35];
-     char lista3[35];
-     char lista4[35];
-     char lista5[11];
-} listas;
+     char nombre[35];
+     char edad[3];
+     char UEA[35];
+     char facebook[35];
+     char telefono[11];
+} per;
+
+//FUNCIONES QUE SE APLICARAN EN EL PROGRMA
 
 int menu_contacto();
 
-listas leer();
+per leer();
 
-void leeTeclado(listas p[MAX], int n);
+void leeTeclado(per p[MAX], int n);
 
-void leeDatos(listas p[MAX], int n);
+void leeDatos(per p[MAX], int n);
 
-void escribeDatos(listas p[MAX],int n);
+void escribeDatos(per p[MAX],int n);
 
-void despliegaDatos(struct Model q[MAX], int n);
+void despliegaDatos(struct persona q[MAX], int n);
 
-void desplegar(struct Model q);
+void desplegar(struct persona q);
 
-listas busca(struct Model q[MAX], int n);
+per busca(struct persona q[MAX], int n);
 
-void alta(listas p[MAX], int *n);
+void alta(per p[MAX], int *n);
 
-listas modificar(struct Model q[MAX],int n,int menu_contacto());
+per modificar(struct persona q[MAX],int n,int menu_contacto());
 
-int busca_elint(struct Model p[MAX], int n );
+int busca_elint(struct persona q[MAX], int n );
 
-void baja(listas q[MAX], int n);
+void baja(per q[MAX], int n);
 
+//FUNCIONES PRINCIPALES DEL PROGRMA
 
 int main ( )
 {
-        listas p[MAX];
-        int n,i, opcion;
+        per p[MAX];
+        int n,i,opcion;
         scanf("%d",&n);    
     do
     {
@@ -63,125 +72,132 @@ int main ( )
                     break;
             case 8: baja(p,n);
                     break;
-            default: printf("OpciÃ³n invalida %d\n", opcion);
+            default: printf("Opci贸n invalida %d\n", opcion);
         }
     } while (opcion != 0);
         return 0;
 }
+//FUNCION BAJA
 
-void baja(listas q[MAX], int n)
+void baja(per q[MAX], int n)
 {
 	int i,a;
-    a=busca_conint(q,n);
-    listas eq;
+    a=busca_elint(q,n);
+    per eq;
     for(i=a;i<n;i++){
     	q[i]=q[i+1];
     }
 	n=n-1;		
 }
+//FUNCION BUSCA_ELIMINA
 
-int busca_conint(struct Model q[MAX], int n )
+int busca_elint(struct persona q[MAX], int n )
 {
     int i;
-    char lista1[35];
-    listas eq;
-    printf("lista2 del Modeluego que deseas eliminar: ");
-    gets(lista1);
+    char nombre[35];
+    per eq;
+    printf("Nombre del contacto que deseas eliminar: ");
+    gets(nombre);
     for(i=0;i<n;i++)
     {
-        if (strcmp(lista1,q[i].lista1) == 0) //iguales
+        if (strcmp(nombre,q[i].nombre) == 0) //iguales
             return(i);
     }
     return(-1);
 }
+//Funcion BUSCA
 
-listas busca(struct Model q[MAX], int n )
+per busca(struct persona q[MAX], int n )
 {
     int i;
-    char lista1[35];
-    listas eq;
-    printf("lista2 del Modeluego que deseas buscar: ");
-    scanf("%s",lista1);
+    char nombre[35];
+    per eq;
+    printf("Nombre del contacto que deseas buscar: ");
+    gets(nombre);
     for(i=0;i<n;i++)
     {
-        if ( strcmp(lista1,q[i].lista1) == 0) //iguales
+        if ( strcmp(nombre,q[i].nombre) == 0) //iguales
             return(q[i]);
     }
 }
 
-listas modificar(struct Model q[MAX],int n,int menu_contacto())
+//FUNCION MODIFICA
+
+per modificar(struct persona q[MAX],int n,int menu_contacto())
 {
     int opcion,i;
-	char lista11[35];
-	char lista21[35];
-	char lista31[20];
-	char lista41[7];
-	char lista51[10];
-    listas eq;
-	printf("lista2 del Modeluego que deseas editar: ");
-    scanf("%s",lista11); 
+	char nombre[35];
+	char edades[5];
+	char lugar[20];
+	char face[7];
+	char cel[10];
+    per eq;
+	printf("Nombre del contacto que deseas editar: ");
+    gets(nombre); 
      do
      {
         opcion= menu_contacto();  
-        //Aqui van las funciones 
+        //Aqui se a dar las funciones 
         switch(opcion)
         {
             case 1:     
-            	    printf("Introduce el lista2 correcto: ");
-			        gets(lista21);
+            	    printf("Introduce edad nueva: ");
+			        gets(edades);
 			        for(i=0;i<n;i++)
                     {
-                      if (strcmp(lista11,q[i].lista1) == 0){
-                          strcpy(q[i].lista2,lista21);
+                      if (strcmp(nombre,q[i].nombre) == 0){
+                          strcpy(q[i].edad,edades);
                       	  return(q[i]);
 					  }
                     }
                     break;
             case 2: 
-			        printf("Introduce la clasificacion correcta: ");
-			        gets(lista31); 
+			        printf("Introduce el nuevo lugar: ");
+			        gets(lugar); 
 			        for(i=0;i<n;i++)
                     {
-                      if (strcmp(lista11,q[i].lista1) == 0){
-                          strcpy(q[i].lista3,lista31);
+                      if (strcmp(nombre,q[i].nombre) == 0){
+                          strcpy(q[i].direccion,lugar);
                       	  return(q[i]);
 					  }
                     }
                     break;
             case 3: 
-			        printf("Introduce el lista4 correcto: ");
-			        gets(lista41);
+			        printf("Dame tu face jajaja: ");
+			        gets(face);
 			        for(i=0;i<n;i++)
                     {
-                      if (strcmp(lista11,q[i].lista1) == 0){
-                          strcpy(q[i].lista4,lista41);
+                      if (strcmp(nombre,q[i].nombre) == 0){
+                          strcpy(q[i].facebook,face);
                       	  return(q[i]);
 					  }
                     }
                 break;
             case 4: 
-			        printf("Introduce el lista5 que hay para el Modeluego : ");
-			        gets(lista51); 
+			        printf("Introduce tu numero nuevo: ");
+			        gets(cel); 
 			        for(i=0;i<n;i++)
                     {
-                      if (strcmp(lista11,q[i].lista1) == 0){
-                          strcpy(q[i].lista5,lista51);
+                      if (strcmp(nombre,q[i].nombre) == 0){
+                          strcpy(q[i].telefono,cel);
                       	  return(q[i]);
 					  }
                     }
                 break;
-            default: printf("OpciÃ³n invalida %d\n", opcion);
+            default: printf("Opci贸n invalida %d\n", opcion);
         }
     } while (opcion != 0);
 }
+//FUNCION DAR DE ALTA EN UN PROGRAMA 
 
-void alta(listas p[MAX], int *n)
+void alta(per p[MAX], int *n)
 {
     p[*n] = leer();
     (*n)++;
 }
+//LEE EL TECLADO
 
-void leeTeclado(listas p[MAX], int n)
+void leeTeclado(per p[MAX], int n)
 {
     int i;
     for(i=0;i<n;i++)
@@ -189,8 +205,9 @@ void leeTeclado(listas p[MAX], int n)
             p[i] = leer();
         }
 }
+//LEE UNA ESTRUCT Y ALMACENA EL ARREGLO
 
-void leeDatos(listas p[MAX], int n)
+void leeDatos(per p[MAX], int n)
 {
     FILE * fp;
     int tam, i;
@@ -206,8 +223,9 @@ void leeDatos(listas p[MAX], int n)
         if (tam > 0) printf("registro leido\n");
     }
 }
+//ESCRIBE UNA ESTRUCTURA Y ALMACENA EL ARREGLO
 
-void escribeDatos(listas p[MAX],int n)
+void escribeDatos(per p[MAX],int n)
 {
     FILE * fp;
     int tam, i;
@@ -223,70 +241,74 @@ void escribeDatos(listas p[MAX],int n)
         if (tam > 0) printf("registro escrito\n");
     }
 }
+//FUNCION DESPLIEGA LOS DATOS
 
-void despliegaDatos(struct Model q[MAX], int n)
+void despliegaDatos(struct persona q[MAX], int n)
 {
      int i;
-     printf("\t   lista1  lista2   lista3     lista4    lista5\n");
+     printf("\t   NOMBRE  EDAD   DIRRECCION     FACEBOOK    TELEFONO\n");
      for(i=0; i<n; i++)
      {
          desplegar(q[i]);
      }
 }
+//DESPLIEGA LOS DATOS EN LAS PARTES DE LA ESTRUCTURA 
 
-void desplegar(struct Model q)
+void desplegar(struct persona q)
 {
-    printf("\n%15s %7s %6s %9s %9s\n",
-           q.lista2,q.lista2,q.lista3,q.lista4,q.lista5);
+    printf("\n%15s %7s %6s %25s %18s\n",
+           q.nombre,q.edad,q.direccion,q.facebook,q.telefono);
 }
-
-struct Model leer()
+//PIDE Y LEE LOS DATOS PRINCIPALES DEL PROGRAMA
+struct persona leer()
 {
-    struct Model listas;
-    printf("lista1: ");
-    gets(listas.lista1);
-    printf("lista2: ");
-    gets(listas.lista2);
-    printf("lista3: ");
-    gets(listas.lista3);
-    printf("lista4: ");
-    gets(listas.lista4);
-    printf("lista5: ");
-    gets(listas.lista5);
+    struct persona per;
+    printf("Nombre: ");
+    gets(per.nombre);
+    printf("Edad: ");
+    gets(per.edad);
+    printf("Direccion: ");
+    gets(per.direccion);
+    printf("Facebook: ");
+    gets(per.facebook);
+    printf("Telefono: ");
+    gets(per.telefono);
     getchar(); /* lee enter */
-    return (listas);
+    return (per);
 }
+//SE INSERTA EL MENU DE PROGRAMA PROGRAMA PRINCIPAL
 
 int menu()
 {
     int opc;
-    printf("\n listas \n");
+    printf("\nCONTACTO \n");
     printf("1. Lectura de datos\n");
-    printf("2. verificar si la lista esta llena\n");
-    printf("3. Escritura de Modeluego a un archivo\n");
-    printf("4. Consulta de un Modeluego disponibles\n");
-    printf("5. Busca en una lista\n");
-    printf("6. Modifica una lista \n");
-    printf("7. Alta de un nuevo lugar en la lista\n");
-    printf("8. Baja de un lugar en la lista \n");
+    printf("2. Lectura de per desde archivo\n");
+    printf("3. Escritura de per a un archivo\n");
+    printf("4. Consulta de personas disponibles\n");
+    printf("5. Busca un contacto\n");
+    printf("6. Modifica info de contacto\n");
+    printf("7. Alta de un nuevo contacto\n");
+    printf("8. Baja de un contacto ya no disponible\n");
     printf("0. Terminar\n");
-    printf("Selecciona opciÃ³n: \n");
+    printf("Selecciona opci贸n: \n");
     scanf("%d",&opc);
     //printf("OPC: %d", opc);
     //fflush(stdin);
     getchar();
     return (opc);
 }
+//INSERTA EL MENU DE LA OPCION MODIFICACION
 
 int menu_contacto(){
     int opci;
     printf("\nElije el la opcion a editar\n");
-    printf("1. lista2\n");
-    printf("2. lista3\n");
-    printf("3. lista4\n");
-    printf("4. lista5\n");
+    printf("1. Edad\n");
+    printf("2. Lugar\n");
+    printf("3. Face\n");
+    printf("4. Telefono\n");
     printf("0. Terminar\n");
-    printf("Selecciona opciÃ³n: \n");
+    printf("Selecciona opci贸n: \n");
     scanf("%d",&opci);
     //printf("OPC: %d", opc);
     //fflush(stdin);

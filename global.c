@@ -3,7 +3,7 @@
 
 typedef struct alumno {
     int rno;
-    char nombre;
+    char nombre[25];
     struct sujeto{
         int calif;
         char UEA;
@@ -27,17 +27,19 @@ void sort_by_nombre_on_screen();
 int main(){
     int ch;                                 // Escoge (choice)
     do{
+        printf("\n==========================================================");
+        printf("\n              💻  menu 💻                                        ");
         printf("\n[ 1 ] - crear");         // Crea el registro
         printf("\n[ 2 ] - imprimir");        // Muestra en pantalla
-        printf("\n[ 3 ] - APPEND");         // Añade o anexa
+        printf("\n[ 3 ] - agregar");         // Añade o anexa
         printf("\n[ 4 ] - numnero de registros");  // Te dice el numero de registro total.
-        printf("\n[ 5 ] - buscar");
+        printf("\n[ 5 ] - buscar por matricula");
         printf("\n[ 6 ] - guardar");
-        printf("\n[ 7 ] - DELETE");
-        printf("\n[ 8 ] - ordenar por descripcion total en SCREEN");
-        printf("\n[ 9 ] - ordenar por descripcion total en FILE");
-        printf("\n[ 10 ] - SOR BY nombre ON SCREEN");
-        printf("\n[ 0 ] - EXIT");           //Salir
+        printf("\n[ 7 ] - borrar registro");
+        printf("\n[ 8 ] - ordenar por descripcion total en la pantalla ");
+        printf("\n[ 9 ] - ordenar por descripcion total en el archivo");
+        printf("\n[ 10 ] - ordenar por nombre en la pantalla ");
+        printf("\n[ 0 ] - salir");           //Salir
 
         printf("\n - INGRESA TU NUMERO A ELEGIR:  ");
         scanf("%d", &ch);
@@ -107,11 +109,11 @@ void crear(){
 
         fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
 
-        printf("Ingresa el Nombre del estudiante: ");
-        scanf("%[^\n]s", s[i].nombre);
+        printf("\nIngresa el Nombre del estudiante: ");
+        scanf("%s", s[i].nombre);
 
         for(j=0;j<2;j++){
-            printf("Ingresa la Calificacion de la UEA%d : ",j+1);
+            printf("\nIngresa la Calificacion de la UEA%d : ",j+1);
             scanf("%d",&s[i].sub[j].mark);
             s[i].total += s[i].sub[j].mark;
         }
@@ -159,11 +161,11 @@ void append(){
 
         fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
 
-        printf("Ingresa el Nombre del estudiante: ");
-        scanf("%[^\n]s", s[i].nombre);
+        printf("\nIngresa el Nombre del estudiante: ");
+        scanf("%s", s[i].nombre);
 
         for(j=0;j<2;j++){
-            printf("Ingresa la Calificacion de la UEA%d : ",j+1);
+            printf("\nIngresa la Calificacion de la UEA%d : ",j+1);
             scanf("%d",&s[i].sub[j].mark);
             s[i].total += s[i].sub[j].mark;
         }

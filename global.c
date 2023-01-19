@@ -34,8 +34,8 @@ int main(){
         printf("\n[ 5 ] - buscar");
         printf("\n[ 6 ] - guardar");
         printf("\n[ 7 ] - DELETE");
-        printf("\n[ 8 ] - SORT BY TOTAL DESC - ON SCREEN");
-        printf("\n[ 9 ] - SORT BY TOTAL DESC - IN DILE");
+        printf("\n[ 8 ] - ordenar por descripcion total en SCREEN");
+        printf("\n[ 9 ] - ordenar por descripcion total en FILE");
         printf("\n[ 10 ] - SOR BY NAME ON SCREEN");
         printf("\n[ 0 ] - EXIT");           //Salir
 

@@ -89,15 +89,15 @@ int main(){
     return 0;
 }
 void crear(){
-    student *s;
+    estudiante *s;
     FILE *fp;
 
     int n, i, j;            // n -> numero de estudiantes, i -> estudiante, j -> Por materia
     printf("\nCuantos estudiantes quieres ingresar?: ");
     scanf("%d",&n);
 
-    s = (student*)calloc(n, sizeof(student));
-    fp = fopen("mystudents.txt", "w");        // Registrará a los estudiantes en un archivo txt.
+    s = (estudiante*)calloc(n, sizeof(estudiante));
+    fp = fopen("myestudiantes.txt", "w");        // Registrará a los estudiantes en un archivo txt.
 
     for(i=0;i<n;i++){
         s[i].total = 0;
@@ -116,19 +116,19 @@ void crear(){
             s[i].total += s[i].sub[j].mark;
         }
         s[i].per = s[i].total / 2.0;
-        fwrite(&s[i],sizeof(student),1,fp);
+        fwrite(&s[i],sizeof(estudiante),1,fp);
     }
     fclose(fp);
 
 }
 
 void imprimir(){
-    student s1;
+    estudiante s1;
     FILE *fp;
     int j;
-    fp = fopen("mystudents.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
+    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
 
-    while(fread(&s1,sizeof(student),1,fp)){
+    while(fread(&s1,sizeof(estudiante),1,fp)){
         printf("\n%-5d%-20s",s1.rno,s1.name);
         for(j=0;j<2;j++){
             printf("%4d",s1.sub[j].mark);
@@ -141,15 +141,15 @@ void imprimir(){
 }
 
 void append(){
-    student *s;
+    estudiante *s;
     FILE *fp;
 
     int n, i, j;            // n -> numero de estudiantes, i -> estudiante, j -> Por materia
     printf("\nCuantos estudiantes quieres ingresar?: ");
     scanf("%d",&n);
 
-    s = (student*)calloc(n, sizeof(student));
-    fp = fopen("mystudents.txt", "a");        // Registrará a los estudiantes en un archivo txt.
+    s = (estudiante*)calloc(n, sizeof(estudiante));
+    fp = fopen("myestudiantes.txt", "a");        // Registrará a los estudiantes en un archivo txt.
 
     for(i=0;i<n;i++){
         s[i].total = 0;
@@ -168,18 +168,18 @@ void append(){
             s[i].total += s[i].sub[j].mark;
         }
         s[i].per = s[i].total / 2.0;
-        fwrite(&s[i],sizeof(student),1,fp);
+        fwrite(&s[i],sizeof(estudiante),1,fp);
     }
     fclose(fp);
 
 }
 
 void noofrec(){
-    student s1;
+    estudiante s1;
     FILE *fp;
-    fp = fopen("mystudents.txt","r");
+    fp = fopen("myestudiantes.txt","r");
     fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(student);
+    int n = ftell(fp)/sizeof(estudiante);
 
     printf("\n\nLos numeros de registro son: %d",n);
 
@@ -187,16 +187,16 @@ void noofrec(){
 }
 
 void buscar(){                                   // Buscaremos por matrícula
-    student s1;
+    estudiante s1;
     FILE *fp;
     int j, rno,found=0;
 
-    fp = fopen("mystudents.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
+    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
 
     printf("Ingrese la matricula para buscar: ");
     scanf("%d",&rno);
 
-    while(fread(&s1,sizeof(student),1,fp)){
+    while(fread(&s1,sizeof(estudiante),1,fp)){
         if(s1.rno == rno){
             found=1;
             printf("\n%-5d%-20s",s1.rno,s1.name);
@@ -216,17 +216,17 @@ void buscar(){                                   // Buscaremos por matrícula
 }
 
 void guardar(){                                   // Buscaremos por matrícula
-    student s1;
+    estudiante s1;
     FILE *fp, *fp1;
     int j, rno,found=0;
 
-    fp = fopen("mystudents.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
+    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
     fp1 = fopen("temp.txt", "w");
 
     printf("Ingrese la matricula para actualizar: ");
     scanf("%d",&rno);
 
-    while(fread(&s1,sizeof(student),1,fp)){
+    while(fread(&s1,sizeof(estudiante),1,fp)){
         if(s1.rno == rno){
             s1.total=0;
             s1.per=0;
@@ -247,7 +247,7 @@ void guardar(){                                   // Buscaremos por matrícula
             s1.per = s1.total / 2.0;
 
             }
-            fwrite(&s1,sizeof(student),1,fp1);               // Actualizará la lista
+            fwrite(&s1,sizeof(estudiante),1,fp1);               // Actualizará la lista
 
 
 
@@ -256,10 +256,10 @@ void guardar(){                                   // Buscaremos por matrícula
     fclose(fp1);
     if(found){
         fp1 = fopen("temp.txt", "r");
-        fp = fopen("mystudents.txt", "w");
+        fp = fopen("myestudiantes.txt", "w");
 
-        while(fread(&s1,sizeof(student),1,fp1)){
-            fwrite(&s1,sizeof(student),1,fp);
+        while(fread(&s1,sizeof(estudiante),1,fp1)){
+            fwrite(&s1,sizeof(estudiante),1,fp);
         }
 
         fclose(fp);
@@ -274,32 +274,32 @@ void guardar(){                                   // Buscaremos por matrícula
 }
 
 void elimina_registro(){                                   // Buscaremos por matrícula
-    student s1;
+    estudiante s1;
     FILE *fp, *fp1;
     int j, rno,found=0;
 
-    fp = fopen("mystudents.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
+    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
     fp1 = fopen("temp.txt", "w");
 
     printf("Ingrese la matricula para eliminar: ");
     scanf("%d",&rno);
 
-    while(fread(&s1,sizeof(student),1,fp)){
+    while(fread(&s1,sizeof(estudiante),1,fp)){
         if(s1.rno == rno){
             found=1;
         }
         else
-            fwrite(&s1,sizeof(student),1,fp1);               // Actualizará la lista
+            fwrite(&s1,sizeof(estudiante),1,fp1);               // Actualizará la lista
 
     }
     fclose(fp);
     fclose(fp1);
     if(found){
         fp1 = fopen("temp.txt", "r");
-        fp = fopen("mystudents.txt", "w");
+        fp = fopen("myestudiantes.txt", "w");
 
-        while(fread(&s1,sizeof(student),1,fp1)){
-            fwrite(&s1,sizeof(student),1,fp);
+        while(fread(&s1,sizeof(estudiante),1,fp1)){
+            fwrite(&s1,sizeof(estudiante),1,fp);
         }
 
         fclose(fp);
@@ -314,17 +314,17 @@ void elimina_registro(){                                   // Buscaremos por mat
 }
 
 void sort_by_total_on_screen(){
-    student *s, s1;
+    estudiante *s, s1;
     FILE *fp;
     int i,j;
-    fp = fopen("mystudents.txt", "r");
+    fp = fopen("myestudiantes.txt", "r");
     fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(student);
-    s = (student*)calloc(n,sizeof(student));
+    int n = ftell(fp)/sizeof(estudiante);
+    s = (estudiante*)calloc(n,sizeof(estudiante));
 
     rewind(fp);
     for(i=0;i<n;i++)
-        fread(&s[i],sizeof(student),1,fp);
+        fread(&s[i],sizeof(estudiante),1,fp);
 
     for(i=0;i<n;i++){
         for(j=i+1;j<n;j++){
@@ -346,17 +346,17 @@ void sort_by_total_on_screen(){
 }
 
 void sort_by_total_in_file(){
-    student *s, s1;
+    estudiante *s, s1;
     FILE *fp;
     int i,j;
-    fp = fopen("mystudents.txt", "r");
+    fp = fopen("myestudiantes.txt", "r");
     fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(student);
-    s = (student*)calloc(n,sizeof(student));
+    int n = ftell(fp)/sizeof(estudiante);
+    s = (estudiante*)calloc(n,sizeof(estudiante));
 
     rewind(fp);
     for(i=0;i<n;i++)
-        fread(&s[i],sizeof(student),1,fp);
+        fread(&s[i],sizeof(estudiante),1,fp);
 
     fclose(fp);
 
@@ -370,7 +370,7 @@ void sort_by_total_in_file(){
         }
     }
 
-    fp = fopen("mystudents.txt", "w");
+    fp = fopen("myestudiantes.txt", "w");
 
      for(i=0;i<n;i++){
         printf("\n%-5d%-20s",s[i].rno,s[i].name);
@@ -378,23 +378,23 @@ void sort_by_total_in_file(){
             printf("%4d",s[i].sub[j].mark);
         }
         printf("%5d%7.2f",s[i].total,s[i].per);
-        fwrite(&s[i],sizeof(student),1,fp);
+        fwrite(&s[i],sizeof(estudiante),1,fp);
     }
 
 }
 
 void sort_by_name_on_screen(){
-    student *s, s1;
+    estudiante *s, s1;
     FILE *fp;
     int i,j;
-    fp = fopen("mystudents.txt", "r");
+    fp = fopen("myestudiantes.txt", "r");
     fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(student);
-    s = (student*)calloc(n,sizeof(student));
+    int n = ftell(fp)/sizeof(estudiante);
+    s = (estudiante*)calloc(n,sizeof(estudiante));
 
     rewind(fp);
     for(i=0;i<n;i++)
-        fread(&s[i],sizeof(student),1,fp);
+        fread(&s[i],sizeof(estudiante),1,fp);
 
     for(i=0;i<n;i++){
         for(j=i+1;j<n;j++){

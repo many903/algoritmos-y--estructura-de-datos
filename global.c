@@ -1,417 +1,299 @@
+// LIBRERIAS QUE SE USARON 
+
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+#define MAX 30
 
-typedef struct alumno {
-    int rno;
-    char nombre[25];
-    struct sujeto{
-        int calif;
-        char UEA;
-        int mark;
-    }sub[3];
-    int total;
-    float per;
-} estudiante;
+//DEFINIR LA ESTRUCTURA DEL POBLEMA
 
-void crear();
-void imprimir();
-void append();
-void noofrec();
-void buscar();
-void guardar();
-void elimina_registro();
-void sort_by_total_on_screen();
-void sort_by_total_in_file();
-void sort_by_nombre_on_screen();
+typedef struct estudiante 
+{
+     char nombre[35];
+     char matricula[30];
+     char UEA[35];
+     char calificacion[35];
+} est;
 
-int main(){
-    int ch;                                 // Escoge (choice)
+//FUNCIONES QUE SE APLICARAN EN EL PROGRMA
+
+int menu_alumno();
+
+est leer();
+
+void leeTeclado(est p[MAX], int n);
+
+void leeDatos(est p[MAX], int n);
+
+void escribeDatos(est p[MAX],int n);
+
+void despliegaDatos(struct estudiante q[MAX], int n);
+
+void desplegar(struct estudiante q);
+
+est busca(struct estudiante q[MAX], int n);
+
+void alta(est p[MAX], int *n);
+
+est modificar(struct estudiante q[MAX],int n,int menu_alumno());
+
+int busca_elint(struct estudiante q[MAX], int n );
+
+void baja(est q[MAX], int n);
+
+//FUNCIONES PRINCIPALES DEL PROGRMA
+
+int main ( )
+{
+        est p[MAX];
+        int n,i,opcion;
+        scanf("%d",&n);    
     do{
-        printf("\n==========================================================");
-        printf("\n              💻  menu 💻                                        ");
-        printf("\n[ 1 ] - crear");         // Crea el registro
-        printf("\n[ 2 ] - imprimir");        // Muestra en pantalla
-        printf("\n[ 3 ] - agregar");         // Añade o anexa
-        printf("\n[ 4 ] - numnero de registros");  // Te dice el numero de registro total.
-        printf("\n[ 5 ] - buscar por matricula");
-        printf("\n[ 6 ] - guardar");
-        printf("\n[ 7 ] - borrar registro");
-        printf("\n[ 8 ] - ordenar por descripcion total en la pantalla ");
-        printf("\n[ 9 ] - ordenar por descripcion total en el archivo");
-        printf("\n[ 10 ] - ordenar por nombre en la pantalla ");
-        printf("\n[ 0 ] - salir");           //Salir
-
-        printf("\n - INGRESA TU NUMERO A ELEGIR:  ");
-        scanf("%d", &ch);
-
-        switch(ch){
-
-            case 1:
-                crear();
-            break;
-
-            case 2:
-                imprimir();
-            break;
-
-            case 3:
-                append();
-            break;
-
-            case 4:
-                noofrec();      // Dice el numero de registros
-            break;
-
-            case 5:
-                buscar();       // Busca
-            break;
-
-            case 6:
-                guardar();
-            break;
-
-            case 7:
-                elimina_registro(); //Eliminar registro.
-            break;
-
-            case 8:
-                sort_by_total_on_screen();
-            break;
-
-            case 9:
-                sort_by_total_in_file();
-            break;
-
-            case 10:
-                sort_by_nombre_on_screen();
-            break;
+        opcion = menu();   
+        switch(opcion)
+        {
+            case 1: leeTeclado(p,n);
+                    break;
+            case 2: leeDatos(p,n);
+                    break;
+            case 3: escribeDatos(p,n);
+                    break;
+            case 4: despliegaDatos(p,n);
+                    break;
+            case 5: desplegar(busca(p,n));
+			        break;
+			case 6: desplegar(modificar(p,n,menu_alumno));
+			        break;
+            case 7: alta(p,&n);
+                    break;
+            case 8: baja(p,n);
+                    break;
+            default: printf("Opci贸n invalida %d\n", opcion);
         }
-    }
-    while(ch!=0);
-    return 0;
+    } while (opcion != 0);
+        return 0;
 }
-void crear(){
-    estudiante *s;
-    FILE *fp;
+//FUNCION BAJA
 
-    int n, i, j;            // n -> numero de estudiantes, i -> estudiante, j -> Por materia
-    printf("\nCuantos estudiantes quieres ingresar?: ");
-    scanf("%d",&n);
-
-    s = (estudiante*)calloc(n, sizeof(estudiante));
-    fp = fopen("myestudiantes.txt", "w");        // Registrará a los estudiantes en un archivo txt.
-
-    for(i=0;i<n;i++){
-        s[i].total = 0;
-        s[i].per = 0;
-        printf("\nIngresa la matricula: ");
-        scanf("%d", &s[i]);
-
-        fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
-
-        printf("\nIngresa el Nombre del estudiante: ");
-        scanf("%s", s[i].nombre);
-
-        for(j=0;j<2;j++){
-            printf("\nIngresa la Calificacion de la UEA%d : ",j+1);
-            scanf("%d",&s[i].sub[j].mark);
-            s[i].total += s[i].sub[j].mark;
-        }
-        s[i].per = s[i].total / 2.0;
-        fwrite(&s[i],sizeof(estudiante),1,fp);
+void baja(est q[MAX], int n)
+{
+	int i,a;
+    a=busca_elint(q,n);
+    est eq;
+    for(i=a;i<n;i++){
+    	q[i]=q[i+1];
     }
-    fclose(fp);
-
+	n=n-1;		
 }
+//FUNCION BUSCA_ELIMINA
 
-void imprimir(){
-    estudiante s1;
-    FILE *fp;
-    int j;
-    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
-
-    while(fread(&s1,sizeof(estudiante),1,fp)){
-        printf("\n%-5d %-20s",s1.rno,s1.nombre);
-        for(j=0;j<2;j++){
-            printf("%4d",s1.sub[j].mark);
-        }
-        printf("%5d %7.2f",s1.total,s1.per);
-    }
-
-    fclose(fp);                                         // Cerramos el archivo
-
-}
-
-void append(){
-    estudiante *s;
-    FILE *fp;
-
-    int n, i, j;            // n -> numero de estudiantes, i -> estudiante, j -> Por materia
-    printf("\nCuantos estudiantes quieres ingresar?: ");
-    scanf("%d",&n);
-
-    s = (estudiante*)calloc(n, sizeof(estudiante));
-    fp = fopen("myestudiantes.txt", "a");        // Registrará a los estudiantes en un archivo txt.
-
-    for(i=0;i<n;i++){
-        s[i].total = 0;
-        s[i].per = 0;
-        printf("\nIngresa la matricula: ");
-        scanf("%d", &s[i]);
-
-        fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
-
-        printf("\nIngresa el Nombre del estudiante: ");
-        scanf("%s", s[i].nombre);
-
-        for(j=0;j<2;j++){
-            printf("\nIngresa la Calificacion de la UEA%d : ",j+1);
-            scanf("%d",&s[i].sub[j].mark);
-            s[i].total += s[i].sub[j].mark;
-        }
-        s[i].per = s[i].total / 2.0;
-        fwrite(&s[i],sizeof(estudiante),1,fp);
-    }
-    fclose(fp);
-
-}
-
-void noofrec(){
-    estudiante s1;
-    FILE *fp;
-    fp = fopen("myestudiantes.txt","r");
-    fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(estudiante);
-
-    printf("\n\nLos numeros de registro son: %d",n);
-
-    fclose(fp);
-}
-
-void buscar(){                                   // Buscaremos por matrícula
-    estudiante s1;
-    FILE *fp;
-    int j, rno,found=0;
-
-    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
-
-    printf("Ingrese la matricula para buscar: ");
-    scanf("%d",&rno);
-
-    while(fread(&s1,sizeof(estudiante),1,fp)){
-        if(s1.rno == rno){
-            found=1;
-            printf("\n%-5d%-20s",s1.rno,s1.nombre);
-            for(j=0;j<2;j++){
-                printf("%4d",s1.sub[j].mark);
-            }
-            printf("%5d%7.2f",s1.total,s1.per);
-        }
-
-        if(!found)
-            printf("\nMatricula no encontrada!");
-
-
-        fclose(fp);                                         // Cerramos el archivo
-
-    }
-}
-
-void guardar(){                                   // Buscaremos por matrícula
-    estudiante s1;
-    FILE *fp, *fp1;
-    int j, rno,found=0;
-
-    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
-    fp1 = fopen("temp.txt", "w");
-
-    printf("Ingrese la matricula para actualizar: ");
-    scanf("%d",&rno);
-
-    while(fread(&s1,sizeof(estudiante),1,fp)){
-        if(s1.rno == rno){
-            s1.total=0;
-            s1.per=0;
-            found=1;
-            printf("\nIngresa la nueva matricula: ");
-            scanf("%d", &s1);
-
-            fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
-
-            printf("Ingresa el nuevo Nombre del estudiante: ");
-            scanf("%[^\n]s", s1.nombre);
-
-            for(j=0;j<2;j++){
-                printf("Ingresa la Calificacion de la UEA%d : ",j+1);
-                scanf("%d",&s1.sub[j].mark);
-                s1.total += s1.sub[j].mark;
-            }
-            s1.per = s1.total / 2.0;
-
-            }
-            fwrite(&s1,sizeof(estudiante),1,fp1);               // Actualizará la lista
-
-
-
-    }
-    fclose(fp);
-    fclose(fp1);
-    if(found){
-        fp1 = fopen("temp.txt", "r");
-        fp = fopen("myestudiantes.txt", "w");
-
-        while(fread(&s1,sizeof(estudiante),1,fp1)){
-            fwrite(&s1,sizeof(estudiante),1,fp);
-        }
-
-        fclose(fp);
-        fclose(fp1);
-    }
-    else
-        printf("\nMatricula no encontrada!");
-
-
-    fclose(fp);                                         // Cerramos el archivo
-
-}
-
-void elimina_registro(){                                   // Buscaremos por matrícula
-    estudiante s1;
-    FILE *fp, *fp1;
-    int j, rno,found=0;
-
-    fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
-    fp1 = fopen("temp.txt", "w");
-
-    printf("Ingrese la matricula para eliminar: ");
-    scanf("%d",&rno);
-
-    while(fread(&s1,sizeof(estudiante),1,fp)){
-        if(s1.rno == rno){
-            found=1;
-        }
-        else
-            fwrite(&s1,sizeof(estudiante),1,fp1);               // Actualizará la lista
-
-    }
-    fclose(fp);
-    fclose(fp1);
-    if(found){
-        fp1 = fopen("temp.txt", "r");
-        fp = fopen("myestudiantes.txt", "w");
-
-        while(fread(&s1,sizeof(estudiante),1,fp1)){
-            fwrite(&s1,sizeof(estudiante),1,fp);
-        }
-
-        fclose(fp);
-        fclose(fp1);
-    }
-    else
-        printf("\nMatricula no encontrada!");
-
-
-    fclose(fp);                                         // Cerramos el archivo
-
-}
-
-void sort_by_total_on_screen(){
-    estudiante *s, s1;
-    FILE *fp;
-    int i,j;
-    fp = fopen("myestudiantes.txt", "r");
-    fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(estudiante);
-    s = (estudiante*)calloc(n,sizeof(estudiante));
-
-    rewind(fp);
+int busca_elint(struct estudiante q[MAX], int n )
+{
+    int i;
+    char nombre[35];
+    est eq;
+    printf("Nombre del alumno que deseas eliminar: ");
+    gets(nombre);
     for(i=0;i<n;i++)
-        fread(&s[i],sizeof(estudiante),1,fp);
-
-    for(i=0;i<n;i++){
-        for(j=i+1;j<n;j++){
-            if(s[i].total <s[j].total){
-                s1 = s[i];
-                s[i] = s[j];
-                s[j] = s1;
-            }
-        }
+    {
+        if (strcmp(nombre,q[i].nombre) == 0) //iguales
+            return(i);
     }
+    return(-1);
+}
+//Funcion BUSCA
 
-     for(i=0;i<n;i++){
-        printf("\n%-5d%-20s",s[i].rno,s[i].nombre);
-        for(j=0;j<2;j++){
-            printf("%4d",s[i].sub[j].mark);
-        }
-        printf("%5d%7.2f",s[i].total,s[i].per);
+est busca(struct estudiante q[MAX], int n )
+{
+    int i;
+    char nombre[35];
+    est eq;
+    printf("Nombre del alumno que deseas buscar: ");
+    gets(nombre);
+    for(i=0;i<n;i++)
+    {
+        if ( strcmp(nombre,q[i].nombre) == 0) //iguales
+            return(q[i]);
     }
 }
 
-void sort_by_total_in_file(){
-    estudiante *s, s1;
-    FILE *fp;
-    int i,j;
-    fp = fopen("myestudiantes.txt", "r");
-    fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(estudiante);
-    s = (estudiante*)calloc(n,sizeof(estudiante));
+//FUNCION MODIFICA
 
-    rewind(fp);
-    for(i=0;i<n;i++)
-        fread(&s[i],sizeof(estudiante),1,fp);
-
-    fclose(fp);
-
-    for(i=0;i<n;i++){
-        for(j=i+1;j<n;j++){
-            if(s[i].total <s[j].total){
-                s1 = s[i];
-                s[i] = s[j];
-                s[j] = s1;
-            }
+est modificar(struct estudiante q[MAX],int n,int menu_alumno())
+{
+    int opcion,i;
+	char nombre[35];
+    int matricula[15];
+    char UEA[35];
+    char calificacion[35];
+    est eq;
+	printf("Nombre del alumno que deseas editar: ");
+    gets(nombre); 
+     do
+     {
+        opcion= menu_alumno();  
+        //Aqui se a dar las funciones 
+        switch(opcion)
+        {
+            case 1:     
+            	    printf("Introduce matricula nueva: ");
+			        gets(matricula);
+			        for(i=0;i<n;i++)
+                    {
+                      if (strcmp(nombre,q[i].nombre) == 0){
+                          strcpy(q[i].matricula,matricula);
+                      	  return(q[i]);
+					  }
+                    }
+                    break;
+            case 2: 
+			        printf("calificacion: ");
+			        gets(calificacion);
+			        for(i=0;i<n;i++)
+                    {
+                      if (strcmp(nombre,q[i].nombre) == 0){
+                          strcpy(q[i].calificacion,calificacion);
+                      	  return(q[i]);
+					  }
+                    }
+                break;
+            case 3: 
+			        printf("corrije el nombre: ");
+			        gets(nombre); 
+			        for(i=0;i<n;i++)
+                    {
+                      if (strcmp(nombre,q[i].nombre) == 0){
+                          strcpy(q[i].nombre,nombre);
+                      	  return(q[i]);
+					  }
+                    }
+                break;
+            default: printf("Opci贸n invalida %d\n", opcion);
         }
-    }
-
-    fp = fopen("myestudiantes.txt", "w");
-
-     for(i=0;i<n;i++){
-        printf("\n%-5d%-20s",s[i].rno,s[i].nombre);
-        for(j=0;j<2;j++){
-            printf("%4d",s[i].sub[j].mark);
-        }
-        printf("%5d%7.2f",s[i].total,s[i].per);
-        fwrite(&s[i],sizeof(estudiante),1,fp);
-    }
-
+    } while (opcion != 0);
 }
+//FUNCION DAR DE ALTA EN UN PROGRAMA 
 
-void sort_by_nombre_on_screen(){
-    estudiante *s, s1;
-    FILE *fp;
-    int i,j;
-    fp = fopen("myestudiantes.txt", "r");
-    fseek(fp,0,SEEK_END);
-    int n = ftell(fp)/sizeof(estudiante);
-    s = (estudiante*)calloc(n,sizeof(estudiante));
+void alta(est p[MAX], int *n)
+{
+    p[*n] = leer();
+    (*n)++;
+}
+//LEE EL TECLADO
 
-    rewind(fp);
+void leeTeclado(est p[MAX], int n)
+{
+    int i;
     for(i=0;i<n;i++)
-        fread(&s[i],sizeof(estudiante),1,fp);
+        {
+            p[i] = leer();
+        }
+}
+//LEE UNA ESTRUCT Y ALMACENA EL ARREGLO
 
-    for(i=0;i<n;i++){
-        for(j=i+1;j<n;j++){
-            if(strcmp(s[i].nombre,s[j].nombre)>0){
-                s1 = s[i];
-                s[i] = s[j];
-                s[j] = s1;
-            }
-        }
+void leeDatos(est p[MAX], int n)
+{
+    FILE * fp;
+    int tam, i;
+    fp = fopen("datos", "rb");
+    if (fp == NULL)
+    {
+        printf("error al abrir el archivo\n");
+        exit(-1);
     }
-     for(i=0;i<n;i++){
-        printf("\n%-5d%-20s",s[i].rno,s[i].nombre);
-        for(j=0;j<2;j++){
-            printf("%4d",s[i].sub[j].mark);
-        }
-        printf("%5d%7.2f",s[i].total,s[i].per);
+    for(i=0;i<n;i++)
+    {
+        tam = fread(&p[i],sizeof(p[i]),1,fp);
+        if (tam > 0) printf("registro leido\n");
     }
+}
+//ESCRIBE UNA ESTRUCTURA Y ALMACENA EL ARREGLO
+
+void escribeDatos(est p[MAX],int n)
+{
+    FILE * fp;
+    int tam, i;
+    fp = fopen("datos", "wb");
+    if (fp == NULL)
+    {
+        printf("error al abrir el archivo\n");
+        exit(1);
+    }
+    for(i=0;i<n;i++)
+    {
+        tam = fwrite(&p[i],sizeof(p[i]),1,fp);
+        if (tam > 0) printf("registro escrito\n");
+    }
+}
+//FUNCION DESPLIEGA LOS DATOS
+
+void despliegaDatos(struct estudiante q[MAX], int n)
+{
+     int i;
+     printf("\t   NOMBRE  matricula UEA calificacion\n");
+     for(i=0; i<n; i++)
+     {
+         desplegar(q[i]);
+     }
+}
+//DESPLIEGA LOS DATOS EN LAS PARTES DE LA ESTRUCTURA 
+
+void desplegar(struct estudiante q)
+{
+    printf("\n%15s %15d %6s %25s\n",
+           q.nombre,q.matricula,q.UEA,q.calificacion);
+}
+//PIDE Y LEE LOS DATOS PRINCIPALES DEL PROGRAMA
+struct estudiante leer()
+{
+    struct estudiante est;
+    printf("Nombre: ");
+    gets(est.nombre);
+    printf("matricula: ");
+    gets(est.matricula);
+    printf("UEA: ");
+    gets(est.UEA);
+    printf("calificacion: ");
+    gets(est.calificacion);
+    getchar(); /* lee enter */
+    return (est);
+}
+//SE INSERTA EL MENU DE PROGRAMA PROGRAMA PRINCIPAL
+
+int menu()
+{
+    int opc;
+    printf("\n =========================================== \n");
+    printf("\n                  💻  ALUMNADO  💻 \n");
+    printf("1. Lectura de datos\n");
+    printf("2. Lectura de este desde archivo\n");
+    printf("3. Escritura de este a un archivo\n");
+    printf("4. Consulta de estudiantes insctrito en la uea\n");
+    printf("5. Busca un alumno\n");
+    printf("6. Modifica info de alumno\n");
+    printf("7. Alta de un nuevo alumno\n");
+    printf("8. Baja de un alumno ya no insctrito en la uea\n");
+    printf("0. Terminar\n");
+    printf("Selecciona opción: \n");
+    scanf("%d",&opc);
+    //printf("OPC: %d", opc);
+    //fflush(stdin);
+    getchar();
+    return (opc);
+}
+//INSERTA EL MENU DE LA OPCION MODIFICACION
+
+int menu_alumno(){
+    int opci;
+    printf("\nElije el la opcion a editar\n");
+    printf("1. matricula\n");
+    printf("2. calificacion \n");
+    printf("3. nombre\n");
+    printf("0. Terminar\n");
+    printf("Selecciona opción: \n");
+    scanf("%d",&opci);
+    //printf("OPC: %d", opc);
+    //fflush(stdin);
+    getchar();
+    return (opci);
 }

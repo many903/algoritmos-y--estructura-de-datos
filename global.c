@@ -11,7 +11,7 @@ typedef struct alumno {
     }sub[3];
     int total;
     float per;
-} estudiente;
+} estudiante;
 
 void crear();
 void imprimir();
@@ -22,7 +22,7 @@ void guardar();
 void elimina_registro();
 void sort_by_total_on_screen();
 void sort_by_total_in_file();
-void sort_by_name_on_screen();
+void sort_by_nombre_on_screen();
 
 int main(){
     int ch;                                 // Escoge (choice)
@@ -36,7 +36,7 @@ int main(){
         printf("\n[ 7 ] - DELETE");
         printf("\n[ 8 ] - ordenar por descripcion total en SCREEN");
         printf("\n[ 9 ] - ordenar por descripcion total en FILE");
-        printf("\n[ 10 ] - SOR BY NAME ON SCREEN");
+        printf("\n[ 10 ] - SOR BY nombre ON SCREEN");
         printf("\n[ 0 ] - EXIT");           //Salir
 
         printf("\n - INGRESA TU NUMERO A ELEGIR:  ");
@@ -81,7 +81,7 @@ int main(){
             break;
 
             case 10:
-                sort_by_name_on_screen();
+                sort_by_nombre_on_screen();
             break;
         }
     }
@@ -108,7 +108,7 @@ void crear(){
         fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
 
         printf("Ingresa el Nombre del estudiante: ");
-        scanf("%[^\n]s", s[i].name);
+        scanf("%[^\n]s", s[i].nombre);
 
         for(j=0;j<2;j++){
             printf("Ingresa la Calificacion de la UEA%d : ",j+1);
@@ -129,7 +129,7 @@ void imprimir(){
     fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
 
     while(fread(&s1,sizeof(estudiante),1,fp)){
-        printf("\n%-5d%-20s",s1.rno,s1.name);
+        printf("\n%-5d%-20s",s1.rno,s1.nombre);
         for(j=0;j<2;j++){
             printf("%4d",s1.sub[j].mark);
         }
@@ -160,7 +160,7 @@ void append(){
         fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
 
         printf("Ingresa el Nombre del estudiante: ");
-        scanf("%[^\n]s", s[i].name);
+        scanf("%[^\n]s", s[i].nombre);
 
         for(j=0;j<2;j++){
             printf("Ingresa la Calificacion de la UEA%d : ",j+1);
@@ -199,7 +199,7 @@ void buscar(){                                   // Buscaremos por matrícula
     while(fread(&s1,sizeof(estudiante),1,fp)){
         if(s1.rno == rno){
             found=1;
-            printf("\n%-5d%-20s",s1.rno,s1.name);
+            printf("\n%-5d%-20s",s1.rno,s1.nombre);
             for(j=0;j<2;j++){
                 printf("%4d",s1.sub[j].mark);
             }
@@ -237,7 +237,7 @@ void guardar(){                                   // Buscaremos por matrícula
             fflush(stdin);                                      // Escribe el contenido de secuencia en el archivo.
 
             printf("Ingresa el nuevo Nombre del estudiante: ");
-            scanf("%[^\n]s", s1.name);
+            scanf("%[^\n]s", s1.nombre);
 
             for(j=0;j<2;j++){
                 printf("Ingresa la Calificacion de la UEA%d : ",j+1);
@@ -337,7 +337,7 @@ void sort_by_total_on_screen(){
     }
 
      for(i=0;i<n;i++){
-        printf("\n%-5d%-20s",s[i].rno,s[i].name);
+        printf("\n%-5d%-20s",s[i].rno,s[i].nombre);
         for(j=0;j<2;j++){
             printf("%4d",s[i].sub[j].mark);
         }
@@ -373,7 +373,7 @@ void sort_by_total_in_file(){
     fp = fopen("myestudiantes.txt", "w");
 
      for(i=0;i<n;i++){
-        printf("\n%-5d%-20s",s[i].rno,s[i].name);
+        printf("\n%-5d%-20s",s[i].rno,s[i].nombre);
         for(j=0;j<2;j++){
             printf("%4d",s[i].sub[j].mark);
         }
@@ -383,7 +383,7 @@ void sort_by_total_in_file(){
 
 }
 
-void sort_by_name_on_screen(){
+void sort_by_nombre_on_screen(){
     estudiante *s, s1;
     FILE *fp;
     int i,j;
@@ -398,7 +398,7 @@ void sort_by_name_on_screen(){
 
     for(i=0;i<n;i++){
         for(j=i+1;j<n;j++){
-            if(strcmp(s[i].name,s[j].name)>0){
+            if(strcmp(s[i].nombre,s[j].nombre)>0){
                 s1 = s[i];
                 s[i] = s[j];
                 s[j] = s1;
@@ -406,7 +406,7 @@ void sort_by_name_on_screen(){
         }
     }
      for(i=0;i<n;i++){
-        printf("\n%-5d%-20s",s[i].rno,s[i].name);
+        printf("\n%-5d%-20s",s[i].rno,s[i].nombre);
         for(j=0;j<2;j++){
             printf("%4d",s[i].sub[j].mark);
         }

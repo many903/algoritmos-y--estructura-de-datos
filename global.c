@@ -131,11 +131,11 @@ void imprimir(){
     fp = fopen("myestudiantes.txt","r");            //Leemos el registro de estudiantes en el archivo guardado
 
     while(fread(&s1,sizeof(estudiante),1,fp)){
-        printf("\n%-5d%-20s",s1.rno,s1.nombre);
+        printf("\n%-5d %-20s",s1.rno,s1.nombre);
         for(j=0;j<2;j++){
             printf("%4d",s1.sub[j].mark);
         }
-        printf("%5d%7.2f",s1.total,s1.per);
+        printf("%5d %7.2f",s1.total,s1.per);
     }
 
     fclose(fp);                                         // Cerramos el archivo
